@@ -11,6 +11,7 @@ public class GameResponse {
     }
 
     public GameResponse(GameService gameService){
+
         this.gameService = gameService;
     }
 
