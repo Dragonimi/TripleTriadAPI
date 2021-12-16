@@ -4,7 +4,7 @@ import com.revature.ttapi.game.models.Game;
 
 public class GameService {
 
-    private final Game Game;
+    private Game Game;
 
     public GameService(Game game){
         this.Game = game;
@@ -16,4 +16,11 @@ public class GameService {
     //UI level close of the game results in no DB updating for MGP(Handled not here but on UI/Websocket DTO? maybe
 
 
+    public com.revature.ttapi.game.models.Game getGame() {
+        return Game;
+    }
+
+    public void setGame(com.revature.ttapi.game.models.Game game) {
+        Game = game;
+    }
 }

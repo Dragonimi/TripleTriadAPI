@@ -12,6 +12,9 @@ public class Game {
     private  String result;
     private  Board board;//winner or loser, set mgp
 
+    public Game(){
+
+    }
 
    public Game (AppUser p1, AppUser p2, Deck p1Deck, Deck p2Deck, Board gameBoard){
        player1 = p1;
