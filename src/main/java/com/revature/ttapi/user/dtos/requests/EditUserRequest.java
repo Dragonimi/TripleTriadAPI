@@ -1,7 +1,6 @@
 package com.revature.ttapi.user.dtos.requests;
 
 import com.revature.ttapi.user.models.AppUser;
-
 import java.util.Objects;
 import java.util.UUID;
 
