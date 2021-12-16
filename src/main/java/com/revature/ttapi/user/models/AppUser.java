@@ -4,6 +4,7 @@ import com.revature.ttapi.collection.CardCollection;
 import com.revature.ttapi.user.dtos.requests.EditUserRequest;
 import com.revature.ttapi.user.dtos.requests.UserRequest;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "app_user")
+//@Component // Trying this cause game hates persisting
 public class AppUser implements Serializable {
 
     @Id
@@ -30,6 +32,7 @@ public class AppUser implements Serializable {
                     CascadeType.REFRESH
             }
     )
+
     @PrimaryKeyJoinColumn
     private UserProfile userProfile;
     @OneToOne(

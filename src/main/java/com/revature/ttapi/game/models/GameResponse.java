@@ -1,4 +1,4 @@
-package com.revature.ttapi.game.models;
+/*package com.revature.ttapi.game.models;
 
 import com.revature.ttapi.game.services.GameService;
 
@@ -15,4 +15,4 @@ public class GameResponse {
         this.gameService = gameService;
     }
 
-}
+}*/

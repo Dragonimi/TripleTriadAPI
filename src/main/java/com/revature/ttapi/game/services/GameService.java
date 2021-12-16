@@ -1,7 +1,9 @@
 package com.revature.ttapi.game.services;
 
 import com.revature.ttapi.game.models.Game;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GameService {
 
     private Game Game;

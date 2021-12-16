@@ -1,45 +1,72 @@
 package com.revature.ttapi.game.models;
 
 import com.revature.ttapi.collection.Deck;
+import com.revature.ttapi.game.services.BoardConverter;
 import com.revature.ttapi.user.models.AppUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Component
+@Scope("prototype")
+@Table(name="Game")
 public class Game {
 
-    private  AppUser player1;
-    private  AppUser player2;
+    @Id
+    @GeneratedValue
+    private int id;
+    private  String player1_username;
+    private  String player2_username;
+    @Transient
     private  Deck deck_p1;
+    @Transient
     private  Deck deck_p2;
     private  String result;
-    private  Board board;//winner or loser, set mgp
+    @Column(columnDefinition = "varchar(1024)")
+    @Convert(converter = BoardConverter.class)
+    private  Board board;
+    private String currentPlayer;
+    //winner or loser, set mgp
 
     public Game(){
-
     }
 
-   public Game (AppUser p1, AppUser p2, Deck p1Deck, Deck p2Deck, Board gameBoard){
-       player1 = p1;
-       player2 = p2;
-       deck_p1 = p1Deck;
-       deck_p2 = p2Deck;
-       board = gameBoard;
-
-   }
-
-
-    public AppUser getPlayer1() {
-        return player1;
+    public Game(String player1_username, String player2_username, Board board) {
+        this.player1_username = player1_username;
+        this.player2_username = player2_username;
+        this.board = board;
     }
 
-    public void setPlayer1(AppUser player1) {
-        this.player1 = player1;
+    public int getId() {
+        return id;
     }
 
-    public AppUser getPlayer2() {
-        return player2;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPlayer2(AppUser player2) {
-        this.player2 = player2;
+    public String getPlayer1_username() {
+        return player1_username;
+    }
+
+    public void setPlayer1_username(String player1_username) {
+        this.player1_username = player1_username;
+    }
+
+    public String getPlayer2_username() {
+        return player2_username;
+    }
+
+    public void setPlayer2_username(String player2_username) {
+        this.player2_username = player2_username;
+    }
+
+    public void setCurrentPlayer(String currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public Deck getDeck_p1() {
@@ -74,5 +101,30 @@ public class Game {
         this.board = board;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return id == game.id && player1_username.equals(game.player1_username) && player2_username.equals(game.player2_username) && Objects.equals(deck_p1, game.deck_p1) && Objects.equals(deck_p2, game.deck_p2) && Objects.equals(result, game.result) && board.equals(game.board) && Objects.equals(currentPlayer, game.currentPlayer);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, player1_username, player2_username, deck_p1, deck_p2, result, board, currentPlayer);
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", player1_username='" + player1_username + '\'' +
+                ", player2_username='" + player2_username + '\'' +
+                ", deck_p1=" + deck_p1 +
+                ", deck_p2=" + deck_p2 +
+                ", result='" + result + '\'' +
+                ", board=" + board +
+                ", currentPlayer='" + currentPlayer + '\'' +
+                '}';
+    }
 }

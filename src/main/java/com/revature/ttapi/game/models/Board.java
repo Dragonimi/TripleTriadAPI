@@ -1,11 +1,13 @@
 package com.revature.ttapi.game.models;
 
 import com.revature.ttapi.card.models.Card;
+import org.springframework.stereotype.Component;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-
+@Component
 public class Board {
 
     private ArrayList<Node> positions;
@@ -16,7 +18,7 @@ public class Board {
 
         //Add Blank Nodes
         for (int i = 0; i < 9; i++) {
-            positions.set(i, new Node());
+            positions.add(i, new Node());
         }
 
         //Connect Board relevant position relationships.
@@ -62,8 +64,25 @@ public class Board {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Board board = (Board) o;
+        return positions.equals(board.positions);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(positions);
+    }
 
+    @Override
+    public String toString() {
+        return "Board{" +
+                "positions=" + positions +
+                '}';
+    }
 
     //Customer node that stores a card played, and relevant position functions for comparing plays made. Only 9 of these nodes should ever be made in 1 game
     //and that makes us able to use index based usage functions of the containing ArrayList.
@@ -150,6 +169,20 @@ public class Board {
         Node west_Node;
         int slotController;
 
+        @Override
+        public String toString() {
+            String cardResult = "";
+            if (playedCard == null) {
+                cardResult = null;
+            } else {
+                cardResult = String.valueOf(playedCard.getId());
+            }
+
+            return "Node{" +
+                    "playedCard=" + cardResult +
+                    ", slotController=" + slotController +
+                    '}';
+        }
     }
 
     /*

@@ -1,4 +1,4 @@
-
+/*
 package com.revature.ttapi.game.controller;
 
 import com.revature.ttapi.game.models.Game;
@@ -19,5 +19,5 @@ public class GameController {
         gameService.setGame(testGame);
         return new GameResponse(gameService);
     }
-}
+}*/
 
